@@ -94,12 +94,10 @@ def main():
         # From POSIX standard - https://docs.python.org/2/library/os.html#process-management
         sys.exit(os.EX_SOFTWARE)
     elif get_commandline_args().cheap is not None:
-        print(f"{b_colors.OKGREEN}chip_block_detected{b_colors.ENDC}")
         global URL
         URL = CHEAP_URL
         parse()
     elif get_commandline_args().expensive is not None:
-        print(f"{b_colors.OKGREEN}exp_block_detected{b_colors.ENDC}")
         URL = EXPENSIVE_URL
         parse()
     elif get_commandline_args().link is not None:
