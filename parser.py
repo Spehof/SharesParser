@@ -47,42 +47,31 @@ def get_page_html(url, params=None):
     return page_html
 
 
-def get_paging_count():
-    page_html = get_page_html(URL)
-    soup = BeautifulSoup(page_html.text, 'html.parser')
-    pages = soup.findAll('a', class_='screener-pages')
-    if pages:
-        return int(pages[-1].get_text())
-    else:
+def get_paging_count(html):
+    soup = BeautifulSoup(html.text, 'html.parser')
+    tags = soup.select('a.screener-pages')
+    if not tags:
         return 1
+    else:
+        return int(tags[-1].get_text())
 
 
 def get_tickers(html):
-    soup = BeautifulSoup(html, 'html.parser')
-    tickers_html = soup.findAll('a', class_='screener-link-primary')
-    for ticker_html in tickers_html:
-        TICKERS.append(ticker_html.getText())
-
-
-def get_shares_number_in_page(url, params=None):
-    html = get_page_html(url)
     soup = BeautifulSoup(html.text, 'html.parser')
-    shares_number = soup.findAll('a', class_='screener-link')
-    return shares_number[len(shares_number) - 10].get_text()
+    tickers = soup.select('body > tr > td > div#screener-content > table > tr > td > table > tr > td:nth-of-type(1) > span')
+    for ticker in tickers:
+        TICKERS.append(ticker.get_text().replace(u'\xa0', u''))
+    return len(tickers)
 
 
 def parse():
     html = get_page_html(URL)
     if html.status_code == 200:
-        pages_count = get_paging_count()
+        pages_count = get_paging_count(html)
         counter = 0
         for page in range(1, pages_count + 1):
-            print(f'Parse pages {page}/{pages_count}...')
             current_html = get_page_html(URL, params={'r': counter})
-
-            curr_shares_counter = get_shares_number_in_page(URL, params={'r': counter})
-            counter += int(curr_shares_counter) + 1
-            get_tickers(current_html.text)
+            counter += get_tickers(current_html) + 1
         print(TICKERS)
     else:
         print('Something goes wrong. Status code: ' + html.status_code)
@@ -116,8 +105,8 @@ def main():
 if __name__ == '__main__':
     # https://finviz.com/screener.ashx?v=111
     URL = ''
-    CHEAP_URL = 'https://finviz.com/screener.ashx?v=111&f=geo_usa,ind_stocksonly,sh_avgvol_o300,sh_curvol_o300,sh_price_u10,ta_averagetruerange_o0.25'
-    EXPENSIVE_URL = 'https://finviz.com/screener.ashx?v=111&f=geo_usa,ind_stocksonly,sh_avgvol_o300,sh_curvol_o300,sh_price_o10,ta_averagetruerange_o1&ft=3'
+    CHEAP_URL = 'https://finviz.com/screener.ashx?v=411&f=geo_usa,ind_stocksonly,sh_avgvol_o300,sh_price_u10,ta_averagetruerange_o0.25&ft=3'
+    EXPENSIVE_URL = 'https://finviz.com/screener.ashx?v=411&f=geo_usa,ind_stocksonly,sh_avgvol_o300,sh_price_o10,ta_averagetruerange_o1&ft=3'
     HEADERS = {
         'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
