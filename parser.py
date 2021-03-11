@@ -82,13 +82,16 @@ def main():
         print(f"{b_colors.FAIL}Warning: \nYou can\'t get cheap and expensive tickers both!{b_colors.ENDC}")
         # From POSIX standard - https://docs.python.org/2/library/os.html#process-management
         sys.exit(os.EX_SOFTWARE)
+
     elif get_commandline_args().cheap:
         global URL
         URL = CHEAP_URL
         parse()
+
     elif get_commandline_args().expensive:
         URL = EXPENSIVE_URL
         parse()
+
     elif get_commandline_args().link is not None:
         if validators.url(get_commandline_args().link) and validate_finviz_url(get_commandline_args().link):
             URL = get_commandline_args().link
@@ -113,3 +116,4 @@ if __name__ == '__main__':
     }
     TICKERS = []
     main()
+
