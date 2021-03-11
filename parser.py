@@ -105,8 +105,8 @@ def main():
 if __name__ == '__main__':
     # https://finviz.com/screener.ashx?v=111
     URL = ''
-    CHEAP_URL = 'https://finviz.com/screener.ashx?v=411&f=geo_usa,ind_stocksonly,sh_avgvol_o300,sh_price_u10,ta_averagetruerange_o0.25&ft=3'
-    EXPENSIVE_URL = 'https://finviz.com/screener.ashx?v=411&f=geo_usa,ind_stocksonly,sh_avgvol_o300,sh_price_o10,ta_averagetruerange_o1&ft=3'
+    CHEAP_URL = 'https://finviz.com/screener.ashx?v=411&f=geo_usa,ind_stocksonly,sh_avgvol_o300,sh_curvol_o300,sh_price_u10,ta_averagetruerange_o0.25'
+    EXPENSIVE_URL = 'https://finviz.com/screener.ashx?v=411&f=geo_usa,ind_stocksonly,sh_avgvol_o300,sh_curvol_o300,sh_price_o10,ta_averagetruerange_o1'
     HEADERS = {
         'User-Agent': 'Mozilla/5.0 (X11; Arch; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
