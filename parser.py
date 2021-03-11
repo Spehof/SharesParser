@@ -32,10 +32,10 @@ def get_commandline_args():
 
     parser.add_argument('-c', '--cheap',
                         help='Parse only cheap shares (Under 10$)',
-                        action='store_const', const='1', )
+                        action='store_true')
     parser.add_argument('-e', '--expensive',
                         help='Parse only expensive shares (Over 10$)',
-                        action='store_const', const='2', )
+                        action='store_true')
     parser.add_argument('-l', '--link',
                         help='Create custom link with custom params and get here')
     args = parser.parse_args()
@@ -78,15 +78,15 @@ def parse():
 
 
 def main():
-    if get_commandline_args().cheap and get_commandline_args().expensive is not None:
+    if get_commandline_args().cheap and get_commandline_args().expensive:
         print(f"{b_colors.FAIL}Warning: \nYou can\'t get cheap and expensive tickers both!{b_colors.ENDC}")
         # From POSIX standard - https://docs.python.org/2/library/os.html#process-management
         sys.exit(os.EX_SOFTWARE)
-    elif get_commandline_args().cheap is not None:
+    elif get_commandline_args().cheap:
         global URL
         URL = CHEAP_URL
         parse()
-    elif get_commandline_args().expensive is not None:
+    elif get_commandline_args().expensive:
         URL = EXPENSIVE_URL
         parse()
     elif get_commandline_args().link is not None:
@@ -108,10 +108,8 @@ if __name__ == '__main__':
     CHEAP_URL = 'https://finviz.com/screener.ashx?v=411&f=geo_usa,ind_stocksonly,sh_avgvol_o300,sh_price_u10,ta_averagetruerange_o0.25&ft=3'
     EXPENSIVE_URL = 'https://finviz.com/screener.ashx?v=411&f=geo_usa,ind_stocksonly,sh_avgvol_o300,sh_price_o10,ta_averagetruerange_o1&ft=3'
     HEADERS = {
-        'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0',
+        'User-Agent': 'Mozilla/5.0 (X11; Arch; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
     }
     TICKERS = []
-    shares_in_page = []
-
     main()
