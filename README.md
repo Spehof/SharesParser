@@ -4,7 +4,7 @@ This script parse tickers from https://finviz.com/screener.ashx?v=411 according 
 
 Examples:
 
-`python3 parser.py > tee tickers.txt > some another place`
+`python3 parser.py -e > tee tickers.txt > some another place`
 
 ## CLI help end args
 

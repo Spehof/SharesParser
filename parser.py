@@ -5,6 +5,8 @@ import sys
 import os
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
+import json
+import pprint
 
 
 class b_colors:
@@ -72,9 +74,9 @@ def parse():
         for page in range(1, pages_count + 1):
             current_html = get_page_html(URL, params={'r': counter})
             counter += get_tickers(current_html) + 1
-        print(TICKERS)
+        print(json.dumps(TICKERS, indent=2, sort_keys=True))
     else:
-        print('Something goes wrong. Status code: ' + html.status_code)
+        print({b_colors.FAIL} + "Something goes wrong. Status code: " + html.status_code + {b_colors.ENDC})
 
 
 def main():
