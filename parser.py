@@ -6,7 +6,6 @@ import os
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 import json
-import pprint
 
 
 class b_colors:
@@ -27,6 +26,16 @@ def validate_finviz_url(url):
         return True
     else:
         return False
+
+# TODO write this func
+def formated_URL(url):
+    parsed_uri = urlparse(url)
+    URL_query_dict = urlparse.parse_qs(parsed_uri.query)
+    if URL_query_dict['v'] is not  411:
+        URL_query_dict['v'] = 411
+        return urllib.urlencode(URL_query_dict)
+    else:
+        return url
 
 
 def get_commandline_args():
@@ -67,6 +76,7 @@ def get_tickers(html):
 
 
 def parse():
+    # TODO add formatted URL
     html = get_page_html(URL)
     if html.status_code == 200:
         pages_count = get_paging_count(html)
