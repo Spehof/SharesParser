@@ -2,7 +2,7 @@
 
 This script parse tickers from https://finviz.com/screener.ashx?v=411 according to your requirements and sending to stdout.
 
-Works well with my other app - [TradingViewClient](https://github.com/Spehof/TradingViewClient)
+Works well with my other app - [TradingViewClient](https://github.com/Spehof/TradingViewClient) (CLI client for TradingView)
 
 Examples:
 
