@@ -2,11 +2,13 @@
 
 This script parse tickers from https://finviz.com/screener.ashx?v=411 according to your requirements and sending to stdout.
 
+Works well with my other app - [TradingViewClient](https://github.com/Spehof/TradingViewClient)
+
 Examples:
 
 `python3 parser.py -e > tee tickers.txt > some another place`
 
-## CLI help end args
+## CLI args
 
 `python3 parser.py -h` or `python3 parser.py --help` 
 
