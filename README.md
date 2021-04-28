@@ -12,7 +12,11 @@ Examples:
 
 `python3 parser.py -c` or `python3 parser.py --cheap` for parsing chares under 10$ with my preset params.
 
+![img.png](images/cheap_example.png)
+
 `python3 parser.py -e` or `python3 parser.py -expensive` for parsing chares over 10$ with my preset params.
+
+![img.png](images/expensive_example.png)
 
 ### Also you can set you own params.
 
@@ -26,7 +30,14 @@ For example:
 
 `python3 parser.py -l https://finviz.com/screener.ashx?v=411&f=an_recom_holdbetter,geo_usa,sh_price_u40,sh_short_u5,ta_averagetruerange_o1.5,ta_sma200_pb&ft=3`
 
-4. Enjoy!
+![img.png](images/custom_link_example.png)
+
+4. Enjoy!    
+
+#### Remember! For now need link from tab tickers
+
+![img.png](images/tickers_screen_example.png)
+
 
 ## Attention!
 

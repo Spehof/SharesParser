@@ -31,7 +31,7 @@ def validate_finviz_url(url):
 def formated_URL(url):
     parsed_uri = urlparse(url)
     URL_query_dict = urlparse.parse_qs(parsed_uri.query)
-    if URL_query_dict['v'] is not  411:
+    if URL_query_dict['v'] !=  411:
         URL_query_dict['v'] = 411
         return urllib.urlencode(URL_query_dict)
     else:
